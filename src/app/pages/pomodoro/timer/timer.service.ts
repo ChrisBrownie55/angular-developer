@@ -30,8 +30,15 @@ export class TimerService {
     this.subscription = this.timer.subscribe(() => {
       /* decrements the time */
       if (this.seconds === 0) {
-        this.seconds = 59;
         this.minutes--;
+        if (this.minutes) {
+          this.seconds = 59;
+        } else {
+          this.unsubscribe();
+          if (this.onFinished) {
+            this.onFinished();
+          }
+        }
       } else {
         this.seconds--;
       }

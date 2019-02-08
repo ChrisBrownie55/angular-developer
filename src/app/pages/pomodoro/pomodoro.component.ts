@@ -7,8 +7,13 @@ import { TimerService } from './timer/timer.service';
   styleUrls: ['./pomodoro.component.scss']
 })
 export class PomodoroComponent implements OnInit {
+  handleFinished = () => {
+    /* TODO: play ding sound */
+  };
+
   constructor(private timer: TimerService) {}
   ngOnInit() {
     this.timer.minutes = 25;
+    this.timer.onFinished = this.handleFinished;
   }
 }

@@ -2,10 +2,6 @@
   "name": "work-for-us",
   "version": "0.0.1",
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/CTCTransportation/angular-developer"
-  },
   "browserslist": [
     "> 1%",
     "last 2 versions",

@@ -1,5 +1,30 @@
-<p>
-  Playing: {{ timer.playing }}
-  <br />
-  Time ({{ timer.minutes }}:{{ timer.seconds.toString().padStart(2, '0') }})
-</p>
+<main class="pomodoro">
+  <nb-card class="pomodoro__time">
+    <h1 class="pomodoro__header--display">
+      {{ timer.minutes | time }}:{{ timer.seconds | time }}
+    </h1>
+  </nb-card>
+  <nb-card class="pomodoro__break">
+    <h1 class="pomodoro__header--title">Break</h1>
+    <br />
+    <p>{{ break }} <small>/4</small></p>
+  </nb-card>
+  <nb-card class="pomodoro__goal">
+    <h1 class="pomodoro__header--title">Goal</h1>
+    <br />
+    <p>{{ goal }} <small>/8</small></p>
+  </nb-card>
+  <nb-card class="pomodoro__update-time">
+    <h1 class="pomodoro__header--title">Update Time</h1>
+    <form (ngSubmit)="handleTimeChange()" class="pomodoro__form">
+      <label class="pomodoro__time-input">
+        Time
+        <div>
+          <input type="number" name="minutes" />
+          <input type="number" name="seconds" />
+        </div>
+      </label>
+      <button nbButton>CHANGE</button>
+    </form>
+  </nb-card>
+</main>

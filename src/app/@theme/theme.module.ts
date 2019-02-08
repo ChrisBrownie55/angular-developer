@@ -18,6 +18,7 @@ import {
   NbPopoverModule,
   NbContextMenuModule,
   NbProgressBarModule,
+  NbButtonModule
 } from '@nebular/theme';
 
 import { NbSecurityModule } from '@nebular/security';
@@ -31,7 +32,7 @@ import {
   LayoutDirectionSwitcherComponent,
   ThemeSwitcherComponent,
   TinyMCEComponent,
-  ThemeSwitcherListComponent,
+  ThemeSwitcherListComponent
 } from './components';
 import {
   CapitalizePipe,
@@ -39,12 +40,13 @@ import {
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
+  EvaIconsPipe
 } from './pipes';
 import {
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
+  TwoColumnsLayoutComponent
 } from './layouts';
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
@@ -71,6 +73,7 @@ const NB_MODULES = [
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive,
   NbProgressBarModule,
+  NbButtonModule
 ];
 
 const COMPONENTS = [
@@ -86,12 +89,10 @@ const COMPONENTS = [
   OneColumnLayoutComponent,
   SampleLayoutComponent,
   ThreeColumnsLayoutComponent,
-  TwoColumnsLayoutComponent,
+  TwoColumnsLayoutComponent
 ];
 
-const ENTRY_COMPONENTS = [
-  ThemeSwitcherListComponent,
-];
+const ENTRY_COMPONENTS = [ThemeSwitcherListComponent];
 
 const PIPES = [
   CapitalizePipe,
@@ -99,34 +100,35 @@ const PIPES = [
   RoundPipe,
   TimingPipe,
   NumberWithCommasPipe,
+  EvaIconsPipe
 ];
 
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
-      name: 'default',
+      name: 'default'
     },
-    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME ],
+    [DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME]
   ).providers,
   ...NbSidebarModule.forRoot().providers,
-  ...NbMenuModule.forRoot().providers,
+  ...NbMenuModule.forRoot().providers
 ];
 
 @NgModule({
-  imports: [ RouterModule, ...BASE_MODULES, ...NB_MODULES],
+  imports: [RouterModule, ...BASE_MODULES, ...NB_MODULES],
   exports: [...BASE_MODULES, ...NB_MODULES, ...COMPONENTS, ...PIPES],
   declarations: [...COMPONENTS, ...PIPES],
   entryComponents: [...ENTRY_COMPONENTS],
-  providers: [ 
-    //UserNotificationService, 
-    //NotificationFunctionService 
+  providers: [
+    //UserNotificationService,
+    //NotificationFunctionService
   ]
 })
 export class ThemeModule {
   static forRoot(): ModuleWithProviders {
     return <ModuleWithProviders>{
       ngModule: ThemeModule,
-      providers: [...NB_THEME_PROVIDERS],
+      providers: [...NB_THEME_PROVIDERS]
     };
   }
 }

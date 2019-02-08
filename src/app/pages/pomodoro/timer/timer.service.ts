@@ -19,6 +19,7 @@ export class TimerService {
     } else if (!value && this.playing) {
       this.unsubscribe();
     }
+    this._playing = value;
   }
 
   public onFinished: Function;

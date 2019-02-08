@@ -1,3 +1,5 @@
 <p>
-  pomodoro works!
+  Playing: {{ timer.playing }}
+  <br />
+  Time ({{ timer.minutes }}:{{ timer.seconds.toString().padStart(2, '0') }})
 </p>

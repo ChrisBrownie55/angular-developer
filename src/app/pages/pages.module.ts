@@ -6,11 +6,9 @@ import { ECommerceModule } from './e-commerce/e-commerce.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
-import { PomodoroComponent } from './pomodoro/pomodoro.component';
+import { PomodoroModule } from './pomodoro/pomodoro.module';
 
-const PAGES_COMPONENTS = [
-  PagesComponent,
-];
+const PAGES_COMPONENTS = [PagesComponent];
 
 @NgModule({
   imports: [
@@ -19,11 +17,8 @@ const PAGES_COMPONENTS = [
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
+    PomodoroModule
   ],
-  declarations: [
-    ...PAGES_COMPONENTS,
-    PomodoroComponent
-  ],
+  declarations: [...PAGES_COMPONENTS]
 })
-export class PagesModule {
-}
+export class PagesModule {}

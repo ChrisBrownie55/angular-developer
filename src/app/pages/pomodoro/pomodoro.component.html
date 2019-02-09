@@ -50,14 +50,42 @@
           />
         </div>
       </label>
-      <button nbButton type="submit">CHANGE</button>
+      <button
+        nbButton
+        type="submit"
+        class="pomodoro__button pomodoro__button--blue"
+      >
+        CHANGE
+      </button>
     </form>
   </nb-card>
-  <footer class="pomodoro__footer">
+  <!-- <footer class="pomodoro__footer">
     <nb-card
       *ngFor="let color of (colors | async)"
       [ngStyle]="{ backgroundColor: color.color }"
       [title]="color.name"
     ></nb-card>
-  </footer>
+  </footer> -->
+  <ng-template #breakDialog let-ref="dialogRef">
+    <nb-card>
+      <nb-card-header>{{
+        breakOver ? 'Get back to work!' : 'Time to take a break'
+      }}</nb-card-header>
+      <nb-card-body>
+        <h1>{{ breakTimer.minutes | time }}:{{ breakTimer.seconds | time }}</h1>
+      </nb-card-body>
+      <nb-card-footer>
+        <button
+          class="pomodoro__button"
+          [ngClass]="{
+            'pomodoro__button--red': !breakOver,
+            'pomodoro__button--green': breakOver
+          }"
+          (click)="ref.close()"
+        >
+          Close
+        </button>
+      </nb-card-footer>
+    </nb-card>
+  </ng-template>
 </main>

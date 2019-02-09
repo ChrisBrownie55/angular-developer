@@ -29,15 +29,16 @@ export class TimerService {
   private subscribe: Function = () => {
     this.subscription = this.timer.subscribe(() => {
       /* decrements the time */
-      if (this.seconds === 0) {
-        this.minutes--;
-        if (this.minutes) {
-          this.seconds = 59;
-        } else {
-          this.unsubscribe();
+      if (!this.seconds) {
+        if (!this.minutes) {
+          this.playing = false;
           if (this.onFinished) {
+            console.log(this.onFinished);
             this.onFinished();
           }
+        } else {
+          this.seconds = 59;
+          this.minutes--;
         }
       } else {
         this.seconds--;

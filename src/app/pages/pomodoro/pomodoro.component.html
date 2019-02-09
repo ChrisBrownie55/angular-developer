@@ -25,15 +25,32 @@
   </nb-card>
   <nb-card class="pomodoro__update-time">
     <h1 class="pomodoro__header--title">Update Time</h1>
-    <form (ngSubmit)="handleTimeChange()" class="pomodoro__form">
+    <form
+      #timeForm="ngForm"
+      (ngSubmit)="handleTimeChange()"
+      class="pomodoro__form"
+    >
       <label class="pomodoro__time-input">
         Time
         <div>
-          <input type="number" name="minutes" />
-          <input type="number" name="seconds" />
+          <input
+            [(ngModel)]="timeForm.minutes"
+            type="number"
+            name="minutes"
+            min="0"
+            max="30"
+          />
+          :
+          <input
+            [(ngModel)]="timeForm.seconds"
+            type="number"
+            name="seconds"
+            min="0"
+            max="59"
+          />
         </div>
       </label>
-      <button nbButton>CHANGE</button>
+      <button nbButton type="submit">CHANGE</button>
     </form>
   </nb-card>
   <footer class="pomodoro__footer">

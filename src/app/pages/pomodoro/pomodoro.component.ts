@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TimerService } from './timer/timer.service';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'ngx-pomodoro',
@@ -21,6 +22,15 @@ export class PomodoroComponent implements OnInit {
       }
       alert('Time to get back to work!');
     }, 1000 * 60 * 5);
+  };
+
+  timeForm: FormGroup = new FormGroup({
+    minutes: new FormControl(25),
+    seconds: new FormControl(0)
+  });
+
+  handleTimeChange: Function = () => {
+    console.log(this.timeForm);
   };
 
   constructor(private timer: TimerService) {}

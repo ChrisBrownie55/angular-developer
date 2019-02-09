@@ -1,64 +1,73 @@
 <main class="pomodoro">
   <nb-card class="pomodoro__time">
-    <h1 class="pomodoro__header--display">
-      {{ timer.minutes | time }}
-      <button
-        class="pomodoro__play-pause"
-        (click)="timer.playing = !timer.playing"
-      >
-        <i
-          [ngClass]="{ 'nb-play': !timer.playing, 'nb-pause': timer.playing }"
-        ></i>
-      </button>
-      {{ timer.seconds | time }}
-    </h1>
+    <nb-card-body>
+      <h1 class="pomodoro__header--display">
+        {{ timer.minutes | time }}
+        <button
+          class="pomodoro__play-pause"
+          (click)="timer.playing = !timer.playing"
+        >
+          <i
+            [ngClass]="{ 'nb-play': !timer.playing, 'nb-pause': timer.playing }"
+          ></i>
+        </button>
+        {{ timer.seconds | time }}
+      </h1>
+    </nb-card-body>
   </nb-card>
   <nb-card class="pomodoro__break">
-    <h1 class="pomodoro__header--title">Break</h1>
-    <br />
-    <p>{{ break }} <small>/4</small></p>
+    <nb-card-body>
+      <h1 class="pomodoro__header--title">Break</h1>
+      <br />
+      <p>{{ break }} <small>/4</small></p>
+    </nb-card-body>
   </nb-card>
   <nb-card class="pomodoro__goal">
-    <h1 class="pomodoro__header--title">Goal</h1>
-    <br />
-    <p>{{ goal }} <small>/8</small></p>
+    <nb-card-body>
+      <h1 class="pomodoro__header--title">Goal</h1>
+      <br />
+      <p>{{ goal }} <small>/8</small></p>
+    </nb-card-body>
   </nb-card>
   <nb-card class="pomodoro__update-time">
-    <h1 class="pomodoro__header--title">Update Time</h1>
-    <form
-      [formGroup]="timeForm"
-      (ngSubmit)="handleTimeChange()"
-      class="pomodoro__form"
-    >
-      <label class="pomodoro__time-input">
-        Time
-        <div>
-          <input
-            formControlName="minutes"
-            type="number"
-            name="minutes"
-            min="0"
-            max="30"
-          />
-          :
-          <input
-            formControlName="seconds"
-            type="number"
-            name="seconds"
-            min="0"
-            max="59"
-          />
-        </div>
-      </label>
-      <button
-        nbButton
-        type="submit"
-        class="pomodoro__button pomodoro__button--blue"
+    <nb-card-body>
+      <h1 class="pomodoro__header--title">Update Time</h1>
+      <form
+        [formGroup]="timeForm"
+        (ngSubmit)="handleTimeChange()"
+        class="pomodoro__form"
       >
-        CHANGE
-      </button>
-    </form>
+        <label class="pomodoro__time-input">
+          Time
+          <div>
+            <input
+              formControlName="minutes"
+              type="number"
+              name="minutes"
+              min="0"
+              max="30"
+            />
+            :
+            <input
+              formControlName="seconds"
+              type="number"
+              name="seconds"
+              min="0"
+              max="59"
+            />
+          </div>
+        </label>
+        <button
+          nbButton
+          type="submit"
+          class="pomodoro__button pomodoro__button--blue"
+        >
+          CHANGE
+        </button>
+      </form>
+    </nb-card-body>
   </nb-card>
+
   <!-- <footer class="pomodoro__footer">
     <nb-card
       *ngFor="let color of (colors | async)"
@@ -66,6 +75,7 @@
       [title]="color.name"
     ></nb-card>
   </footer> -->
+
   <ng-template #breakDialog let-ref="dialogRef">
     <nb-card>
       <nb-card-header>{{

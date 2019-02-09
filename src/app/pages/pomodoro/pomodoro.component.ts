@@ -3,6 +3,11 @@ import { TimerService } from './timer/timer.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { NbDialogService } from '@nebular/theme';
 
+const hasVibrate: boolean = 'vibrate' in navigator;
+const beepSound: HTMLAudioElement = new Audio(
+  'http://soundbible.com/grab.php?id=2197&type=mp3'
+);
+
 class Timer extends TimerService {}
 class Break extends TimerService {}
 
@@ -18,24 +23,38 @@ export class PomodoroComponent implements OnInit {
 
   @ViewChild('breakDialog') breakDialog;
 
+  /**
+   * Plays beep sound and vibrates device
+   */
+  static playBeep() {
+    beepSound.currentTime = 9; // 3 beeps
+    beepSound.play();
+
+    if (hasVibrate) {
+      navigator.vibrate([200, 400, 200, 400, 200, 400, 200]);
+    }
+  }
+
   handleFinished: Function = () => {
-    console.log('opening break dialog');
-    /* TODO: play ding sound */
+    PomodoroComponent.playBeep();
+
     this.break++;
     this.breakTimer.seconds = 0;
     this.breakTimer.minutes = this.break === 4 ? 15 : 5;
     this.breakTimer.playing = true;
 
-    this.dialogService.open(this.breakDialog, { closeOnBackdropClick: false });
-    // .onClose.subscribe();
-  };
+    const dialogRef = this.dialogService.open(this.breakDialog, {
+      closeOnBackdropClick: false
+    });
+    dialogRef.onClose.subscribe(() => {
+      this.timer.minutes = this.timeForm.value.minutes;
+      this.timer.seconds = this.timeForm.value.seconds;
 
-  handleBreakFinished: Function = () => {
-    /* Play break over ding sound */
-    if (this.break === 4) {
-      this.goal++;
-      this.break = 0;
-    }
+      if (this.break === 4) {
+        this.goal++;
+        this.break = 0;
+      }
+    });
   };
 
   timeForm: FormGroup = new FormGroup({
@@ -60,8 +79,6 @@ export class PomodoroComponent implements OnInit {
   ngOnInit() {
     this.timer.minutes = 25;
     this.timer.onFinished = this.handleFinished;
-    this.breakTimer.onFinished = this.handleBreakFinished;
-    console.log('Is this.timer equal to this.breakTimer?');
-    console.log(this.timer === this.breakTimer ? 'Yes' : 'No');
+    this.breakTimer.onFinished = PomodoroComponent.playBeep;
   }
 }

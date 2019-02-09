@@ -30,7 +30,15 @@ export class PomodoroComponent implements OnInit {
   });
 
   handleTimeChange: Function = () => {
-    console.log(this.timeForm);
+    console.log('Changing time values');
+    console.log(
+      `> Minutes: ${this.timer.minutes} -> ${this.timeForm.value.minutes}`
+    );
+    console.log(
+      `> Seconds: ${this.timer.seconds} -> ${this.timeForm.value.seconds}`
+    );
+    this.timer.minutes = this.timeForm.value.minutes;
+    this.timer.seconds = this.timeForm.value.seconds;
   };
 
   constructor(private timer: TimerService) {}

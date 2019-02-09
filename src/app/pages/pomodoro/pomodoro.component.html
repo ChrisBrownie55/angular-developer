@@ -26,7 +26,7 @@
   <nb-card class="pomodoro__update-time">
     <h1 class="pomodoro__header--title">Update Time</h1>
     <form
-      #timeForm="ngForm"
+      [formGroup]="timeForm"
       (ngSubmit)="handleTimeChange()"
       class="pomodoro__form"
     >
@@ -34,7 +34,7 @@
         Time
         <div>
           <input
-            [(ngModel)]="timeForm.minutes"
+            formControlName="minutes"
             type="number"
             name="minutes"
             min="0"
@@ -42,7 +42,7 @@
           />
           :
           <input
-            [(ngModel)]="timeForm.seconds"
+            formControlName="seconds"
             type="number"
             name="seconds"
             min="0"

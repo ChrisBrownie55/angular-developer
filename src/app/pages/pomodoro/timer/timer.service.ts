@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
+import { interval, Subscription, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,9 +8,9 @@ export class TimerService {
   public minutes: number = 0;
   public seconds: number = 0;
 
-  private _playing = false;
+  private _playing: boolean = false;
   /* I'm using getters and setters so that I can sub & unsub from the timer */
-  public get playing() {
+  public get playing(): boolean {
     return this._playing;
   }
   public set playing(value) {
@@ -24,9 +24,9 @@ export class TimerService {
 
   public onFinished: Function;
 
-  private timer = interval(1000);
+  private timer: Observable<number> = interval(1000);
   private subscription: Subscription;
-  private subscribe = () => {
+  private subscribe: Function = () => {
     this.subscription = this.timer.subscribe(() => {
       /* decrements the time */
       if (this.seconds === 0) {

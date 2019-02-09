@@ -1,7 +1,16 @@
 <main class="pomodoro">
   <nb-card class="pomodoro__time">
     <h1 class="pomodoro__header--display">
-      {{ timer.minutes | time }}:{{ timer.seconds | time }}
+      {{ timer.minutes | time }}
+      <button
+        class="pomodoro__play-pause"
+        (click)="timer.playing = !timer.playing"
+      >
+        <i
+          [ngClass]="{ 'nb-play': !timer.playing, 'nb-pause': timer.playing }"
+        ></i>
+      </button>
+      {{ timer.seconds | time }}
     </h1>
   </nb-card>
   <nb-card class="pomodoro__break">
@@ -27,4 +36,11 @@
       <button nbButton>CHANGE</button>
     </form>
   </nb-card>
+  <footer class="pomodoro__footer">
+    <nb-card
+      *ngFor="let color of (colors | async)"
+      [ngStyle]="{ backgroundColor: color.color }"
+      [title]="color.name"
+    ></nb-card>
+  </footer>
 </main>

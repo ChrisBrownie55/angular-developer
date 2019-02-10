@@ -5,17 +5,17 @@ import { NbDialogService } from '@nebular/theme';
 
 const hasVibrate: boolean = 'vibrate' in navigator;
 const beepSound: HTMLAudioElement = new Audio(
-  'http://soundbible.com/grab.php?id=2197&type=mp3'
+  'http://soundbible.com/grab.php?id=2197&type=mp3',
 );
 
-class Timer extends TimerService {}
-class Break extends TimerService {}
+export class Timer extends TimerService {}
+export class Break extends TimerService {}
 
 @Component({
   selector: 'ngx-pomodoro',
   templateUrl: './pomodoro.component.html',
   styleUrls: ['./pomodoro.component.scss'],
-  providers: [Timer, Break]
+  providers: [Timer, Break],
 })
 export class PomodoroComponent implements OnInit {
   break: number = 0;
@@ -27,8 +27,8 @@ export class PomodoroComponent implements OnInit {
    * Plays beep sound and vibrates device
    */
   static playBeep() {
-    beepSound.currentTime = 9; // 3 beeps
     beepSound.play();
+    setTimeout(() => beepSound.pause(), 3000); // 3 beeps
 
     if (hasVibrate) {
       navigator.vibrate([200, 400, 200, 400, 200, 400, 200]);
@@ -44,7 +44,7 @@ export class PomodoroComponent implements OnInit {
     this.breakTimer.playing = true;
 
     const dialogRef = this.dialogService.open(this.breakDialog, {
-      closeOnBackdropClick: false
+      closeOnBackdropClick: false,
     });
     dialogRef.onClose.subscribe(() => {
       this.timer.minutes = this.timeForm.value.minutes;
@@ -55,17 +55,17 @@ export class PomodoroComponent implements OnInit {
         this.break = 0;
       }
     });
-  };
+  }
 
   timeForm: FormGroup = new FormGroup({
     minutes: new FormControl(25),
-    seconds: new FormControl(0)
+    seconds: new FormControl(0),
   });
 
   handleTimeChange: Function = () => {
     this.timer.minutes = this.timeForm.value.minutes;
     this.timer.seconds = this.timeForm.value.seconds;
-  };
+  }
 
   get breakOver() {
     return !this.breakTimer.seconds && !this.breakTimer.minutes;
@@ -74,7 +74,7 @@ export class PomodoroComponent implements OnInit {
   constructor(
     private timer: Timer,
     private breakTimer: Break,
-    private dialogService: NbDialogService
+    private dialogService: NbDialogService,
   ) {}
   ngOnInit() {
     this.timer.minutes = 25;

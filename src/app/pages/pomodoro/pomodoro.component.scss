@@ -97,12 +97,13 @@
       color: hsl(0, 0%, 13%);
       text-align: center;
       font-size: 3.75rem;
+      font-weight: 300;
 
       & > small {
         margin-left: -1rem;
 
         font-size: 2rem;
-        font-weight: normal;
+        font-weight: 500;
       }
     }
   }
@@ -116,29 +117,39 @@
     text-align: center;
 
     & > div {
-      background-color: hsl(264, 100%, 97%);
-      padding: 0.5rem 0.75rem;
+      background-color: hsl(212, 100%, 95%);
       border-radius: 2px;
 
       & > input {
-        color: hsl(265, 100%, 20%);
+        padding: 0.5rem 0.75rem;
+        color: hsl(212, 100%, 20%);
 
         border: none;
         background: transparent;
         appearance: none;
-
-        &:first-child {
-          text-align: right;
-        }
       }
     }
   }
   &__button {
+    padding: 0.5rem 0.75rem;
+
+    color: white;
+    background-color: hsl(0, 0%, 25%);
+
+    border: none;
+    border-radius: 2px;
+
+    cursor: pointer;
+    appearance: none;
+
     &--blue {
+      background-color: hsl(212, 69%, 65%);
     }
     &--red {
+      background-color: hsl(7, 67%, 65%);
     }
     &--green {
+      background-color: hsl(131, 46%, 65%);
     }
   }
 

@@ -1,7 +1,7 @@
 <main class="pomodoro">
   <nb-card class="pomodoro__time">
     <nb-card-body>
-      <h1 class="pomodoro__header--display">
+      <h1 class="pomodoro__header pomodoro__header--display">
         {{ timer.minutes | time }}
         <button
           class="pomodoro__play-pause"
@@ -17,21 +17,21 @@
   </nb-card>
   <nb-card class="pomodoro__break">
     <nb-card-body>
-      <h1 class="pomodoro__header--title">Break</h1>
+      <h1 class="pomodoro__header pomodoro__header--title">Break</h1>
       <br />
       <p>{{ break }} <small>/4</small></p>
     </nb-card-body>
   </nb-card>
   <nb-card class="pomodoro__goal">
     <nb-card-body>
-      <h1 class="pomodoro__header--title">Goal</h1>
+      <h1 class="pomodoro__header pomodoro__header--title">Goal</h1>
       <br />
       <p>{{ goal }} <small>/8</small></p>
     </nb-card-body>
   </nb-card>
   <nb-card class="pomodoro__update-time">
     <nb-card-body>
-      <h1 class="pomodoro__header--title">Update Time</h1>
+      <h1 class="pomodoro__header pomodoro__header--title">Update Time</h1>
       <form
         [formGroup]="timeForm"
         (ngSubmit)="handleTimeChange()"
@@ -93,7 +93,7 @@
           }"
           (click)="ref.close()"
         >
-          Close
+          {{ breakOver ? 'Okay' : 'Cancel' }}
         </button>
       </nb-card-footer>
     </nb-card>

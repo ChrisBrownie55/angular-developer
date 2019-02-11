@@ -37,28 +37,31 @@
         (ngSubmit)="handleTimeChange()"
         class="pomodoro__form"
       >
-        <label class="pomodoro__time-input">
-          Time
-          <div>
-            <input
-              formControlName="minutes"
-              type="number"
-              name="minutes"
-              min="0"
-              max="30"
-            />
-            :
-            <input
-              formControlName="seconds"
-              type="number"
-              name="seconds"
-              min="0"
-              max="59"
-            />
-          </div>
-        </label>
+        <div class="pomodoro__update-time--labels">
+          <label for="pomodoro__minutes">Minutes</label>
+          <label for="pomodoro__seconds">Seconds</label>
+        </div>
+        <div class="pomodoro__time-input">
+          <input
+            formControlName="minutes"
+            type="number"
+            name="minutes"
+            min="0"
+            max="30"
+            id="pomodoro__minutes"
+          />
+          :
+          <input
+            formControlName="seconds"
+            type="number"
+            name="seconds"
+            min="0"
+            max="59"
+            id="pomodoro__seconds"
+          />
+        </div>
         <button
-          type="submit"
+           type="submit"
           class="pomodoro__button pomodoro__button--blue"
         >
           CHANGE
@@ -76,12 +79,12 @@
   </footer> -->
 
   <ng-template #breakDialog let-ref="dialogRef">
-    <nb-card>
-      <nb-card-header>{{
+    <nb-card class="pomodoro__break-timer">
+      <nb-card-header align="center">{{
         breakOver ? 'Get back to work!' : 'Time to take a break'
       }}</nb-card-header>
       <nb-card-body>
-        <h1>{{ breakTimer.minutes | time }}:{{ breakTimer.seconds | time }}</h1>
+        <h1 align="center">{{ breakTimer.minutes | time }}:{{ breakTimer.seconds | time }}</h1>
       </nb-card-body>
       <nb-card-footer>
         <button

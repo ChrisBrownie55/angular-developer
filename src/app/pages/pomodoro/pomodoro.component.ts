@@ -8,6 +8,8 @@ const beepSound: HTMLAudioElement = new Audio(
   'http://soundbible.com/grab.php?id=2197&type=mp3',
 );
 
+const wait = duration => new Promise(resolve => setTimeout(resolve, duration));
+
 export class Timer extends TimerService {}
 export class Break extends TimerService {}
 
@@ -26,22 +28,22 @@ export class PomodoroComponent implements OnInit {
   /**
    * Plays beep sound and vibrates device
    */
-  static playBeep() {
-    beepSound.play();
-    setTimeout(() => beepSound.pause(), 3000); // 3 beeps
-
+  static async playBeep() {
     if (hasVibrate) {
       navigator.vibrate([200, 400, 200, 400, 200, 400, 200]);
     }
+
+    beepSound.currentTime = 0;
+    beepSound.play();
+
+    await wait(3000); // stop after 3 beeps
+    beepSound.pause();
   }
 
-  handleFinished: Function = () => {
-    PomodoroComponent.playBeep();
-
+  handleFinished: Function = async () => {
     this.break++;
     this.breakTimer.seconds = 0;
     this.breakTimer.minutes = this.break === 4 ? 15 : 5;
-    this.breakTimer.playing = true;
 
     const dialogRef = this.dialogService.open(this.breakDialog, {
       closeOnBackdropClick: false,
@@ -54,7 +56,12 @@ export class PomodoroComponent implements OnInit {
         this.goal++;
         this.break = 0;
       }
+
+      this.breakTimer.playing = false;
     });
+
+    await PomodoroComponent.playBeep();
+    this.breakTimer.playing = true;
   }
 
   timeForm: FormGroup = new FormGroup({

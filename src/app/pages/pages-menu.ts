@@ -3,14 +3,9 @@ import { NbMenuItem } from '@nebular/theme';
 export const MENU_ITEMS: NbMenuItem[] = [
   {
     title: 'Dashboard',
-    icon: 'layout',
+    icon: 'ion-android-home',
     link: '/pages/dashboard',
     home: true,
-  },
-  {
-    title: 'Task 2 - Like This',
-    icon: 'nb-home',
-    link: '/pages/iot-dashboard',
   },
   {
     title: 'FEATURES',
